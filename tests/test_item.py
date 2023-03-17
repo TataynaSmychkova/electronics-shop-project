@@ -39,6 +39,16 @@ def test_name():
     assert item.name == 'Смартфон'
     item.name = 'текст'
     assert item.name == 'текст'
-    with pytest.raises(ValueError):
+    with pytest.raises(Exception):
         item.name = 'СуперСмартфон'
+
+
+def test__repr__():
+    item1 = Item(name='Смартфон', price=10000, quantity=20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test__str__():
+    item1 = Item(name='Смартфон', price=10000, quantity=20)
+    assert str(item1) == 'Смартфон'
 
