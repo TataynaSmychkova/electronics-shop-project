@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -52,3 +53,11 @@ def test__str__():
     item1 = Item(name='Смартфон', price=10000, quantity=20)
     assert str(item1) == 'Смартфон'
 
+
+def test_add__():
+    item1 = Item("Смартфон", 10000, 20)
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+    with pytest.raises(ValueError):
+        phone1 + 5

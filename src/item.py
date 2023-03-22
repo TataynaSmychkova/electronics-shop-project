@@ -24,7 +24,7 @@ class Item:
         # Item.all.append(self)
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls) -> None:
         with open(PATH_TO_FILE, 'r', newline='', encoding='windows-1251') as csvfile:
             data = DictReader(csvfile)
             for row in data:
@@ -38,7 +38,7 @@ class Item:
             return 0
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @name.setter
@@ -62,8 +62,14 @@ class Item:
         """
         self.price *= self.pay_rate
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.__name}'
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return int(self.quantity) + int(other.quantity)
+
